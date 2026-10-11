@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TESVPN</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:#0b0d17;color:#fff;line-height:1.5;overflow-x:hidden}
+.glow{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,.15),transparent 70%);border-radius:50%;pointer-events:none;z-index:0}
+.glow-1{top:-200px;left:-200px}
+.glow-2{bottom:-200px;right:-200px;background:radial-gradient(circle,rgba(138,43,226,.15),transparent 70%)}
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+header{padding:24px 0;display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:24px}
+.logo i{color:#00d4ff;font-size:28px}
+.logo span{background:linear-gradient(135deg,#fff,#a0a0ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:32px;color:#b0b8d0}
+.nav-links a{text-decoration:none;color:inherit}
+.nav-links a:hover{color:#fff}
+.header-cta{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:10px 22px;border-radius:60px;color:#fff;font-weight:600;cursor:pointer}
+.hero{padding:60px 0 80px;display:flex;align-items:center;gap:40px}
+.hero-content{flex:1}
+.hero h1{font-size:56px;font-weight:800;line-height:1.1;margin-bottom:24px}
+.hero h1 .gradient{background:linear-gradient(135deg,#00d4ff,#8a2be2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:18px;color:#a0a8c0;max-width:520px;margin-bottom:40px}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,#00d4ff,#8a2be2);border:none;padding:16px 36px;border-radius:60px;font-weight:700;font-size:17px;color:#fff;cursor:pointer;box-shadow:0 8px 30px rgba(0,212,255,.3);display:flex;align-items:center;gap:10px}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,.25);padding:16px 36px;border-radius:60px;font-weight:600;font-size:17px;color:#fff;cursor:pointer;display:flex;align-items:center;gap:10px}
+.hero-visual{flex:1;display:flex;justify-content:center}
+.hero-card{background:rgba(20,25,45,.8);border:1px solid rgba(255,255,255,.08);border-radius:32px;padding:40px 32px;max-width:360px;text-align:center}
+.shield-icon{width:96px;height:96px;margin:0 auto 24px;border-radius:50%;background:linear-gradient(135deg,rgba(0,212,255,.15),rgba(138,43,226,.15));border:1.5px solid rgba(0,212,255,.35);display:flex;align-items:center;justify-content:center;font-size:44px;color:#00d4ff}
+.status{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+.status-dot{width:12px;height:12px;background:#00ff88;border-radius:50%;box-shadow:0 0 15px #00ff88;animation:pulse 1.5s infinite}
+@keyframes pulse{50%{opacity:.5;transform:scale(1.2)}}
+.hero-card h3{font-size:22px;font-weight:700;margin-bottom:8px}
+.hero-card .sub{color:#8890a8;font-size:15px}
+.trial-section{padding:40px 0 60px;text-align:center}
+.trial-banner{background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(138,43,226,.1));border:1px solid rgba(0,212,255,.2);border-radius:32px;padding:48px 32px;max-width:900px;margin:0 auto}
+.trial-banner h2{font-size:32px;font-weight:700;margin-bottom:16px}
+.trial-banner h2 i{color:#00d4ff;margin-right:10px}
+.trial-details{display:flex;justify-content:center;gap:40px;margin:28px 0 32px;flex-wrap:wrap}
+.trial-detail{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:500}
+.trial-detail i{color:#00d4ff;font-size:22px}
+.btn-trial{background:linear-gradient(135deg,#00d4ff,#8a2be2);border:none;padding:18px 48px;border-radius:60px;font-weight:700;font-size:18px;color:#fff;cursor:pointer;box-shadow:0 8px 30px rgba(0,212,255,.3);display:inline-flex;align-items:center;gap:12px}
+.pricing-section{padding:60px 0 80px}
+.section-title{text-align:center;font-size:40px;font-weight:800;margin-bottom:16px}
+.section-subtitle{text-align:center;color:#a0a8c0;font-size:18px;margin-bottom:56px}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.pricing-card{background:rgba(20,25,45,.6);border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:36px 28px;cursor:pointer;transition:.3s}
+.pricing-card:hover{transform:translateY(-8px);border-color:rgba(0,212,255,.4)}
+.pricing-card.popular{border:1.5px solid #00d4ff;box-shadow:0 0 40px rgba(0,212,255,.15)}
+.pricing-card h3{font-size:24px;font-weight:700;margin-bottom:24px}
+.price{font-size:44px;font-weight:800;margin-bottom:4px}
+.price-period{color:#8890a8;font-size:15px;margin-bottom:28px}
+.features-list{list-style:none;margin-bottom:32px}
+.features-list li{padding:10px 0;display:flex;align-items:center;gap:12px;font-size:15px;color:#c0c8d8}
+.features-list li i{color:#00d4ff;font-size:14px;width:18px}
+.btn-pricing{width:100%;padding:16px;border-radius:60px;font-weight:700;font-size:16px;cursor:pointer;border:none}
+.btn-pricing.primary{background:linear-gradient(135deg,#00d4ff,#8a2be2);color:#fff}
+.btn-pricing.secondary{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#fff}
+.support-section{padding:60px 0 100px;text-align:center}
+.support-card{background:rgba(20,25,45,.6);border:1px solid rgba(255,255,255,.08);border-radius:32px;padding:48px 32px;max-width:700px;margin:0 auto}
+.support-card h2{font-size:32px;font-weight:700;margin-bottom:12px}
+.support-card p{color:#a0a8c0;margin-bottom:32px}
+.support-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.support-btn{display:flex;align-items:center;gap:10px;padding:16px 32px;border-radius:60px;font-weight:600;font-size:16px;text-decoration:none}
+.support-btn.telegram{background:#0088cc;color:#fff}
+.support-btn.email{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff}
+footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.06);color:#68708a;font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:#8890a8;text-decoration:none}
+.modal-overlay{position:fixed;inset:0;background:rgba(5,7,15,.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:1000;opacity:0;visibility:hidden;transition:.3s}
+.modal-overlay.active{opacity:1;visibility:visible}
+.modal{background:linear-gradient(145deg,#141a30,#0f1428);border:1px solid rgba(0,212,255,.3);border-radius:28px;padding:40px 36px;max-width:460px;width:100%;position:relative;transform:scale(.9);transition:.3s}
+.modal-overlay.active .modal{transform:scale(1)}
+.modal-close{position:absolute;top:18px;right:18px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#a0a8c0;cursor:pointer;font-size:16px}
+.modal-icon{width:72px;height:72px;margin:0 auto 20px;border-radius:50%;background:linear-gradient(135deg,rgba(0,212,255,.2),rgba(138,43,226,.2));border:1.5px solid rgba(0,212,255,.4);display:flex;align-items:center;justify-content:center;font-size:32px;color:#00d4ff}
+.modal h3{font-size:24px;font-weight:700;text-align:center;margin-bottom:8px}
+.modal .modal-subtitle{text-align:center;color:#a0a8c0;font-size:15px;margin-bottom:24px}
+.key-box{background:rgba(0,0,0,.4);border:1px dashed rgba(0,212,255,.5);border-radius:16px;padding:18px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.key-box code{font-family:monospace;font-size:17px;font-weight:700;color:#00d4ff;letter-spacing:1px;word-break:break-all}
+.copy-btn{background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.3);color:#00d4ff;width:42px;height:42px;border-radius:12px;cursor:pointer;font-size:15px}
+.modal-features{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.modal-feature{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:12px;font-size:14px;color:#c0c8d8}
+.modal-feature i{color:#00d4ff;width:18px}
+.modal-actions{display:flex;flex-direction:column;gap:12px}
+.modal-btn{width:100%;padding:16px;border-radius:60px;font-weight:700;font-size:16px;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none}
+.modal-btn.primary{background:linear-gradient(135deg,#00d4ff,#8a2be2);color:#fff}
+.modal-btn.secondary{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#fff}
+@media(max-width:900px){.hero{flex-direction:column;text-align:center}.hero h1{font-size:40px}.hero-buttons{justify-content:center}.nav-links{display:none}}
+@media(max-width:500px){.hero h1{font-size:32px}.pricing-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="container">
+<header>
+<div class="logo"><i class="fas fa-shield-halved"></i><span>TES<span style="color:#00d4ff">VPN</span></span></div>
+<div class="nav-links"><a href="#pricing">Тарифы</a><a href="#trial">Бесплатно</a><a href="https://t.me/tesvpnss" target="_blank">Поддержка</a></div>
+<button class="header-cta" onclick="document.getElementById('trial').scrollIntoView({behavior:'smooth'})">Попробовать</button>
+</header>
+<section class="hero">
+<div class="hero-content">
+<h1>Свобода в сети<br><span class="gradient">без границ</span></h1>
+<p>Надёжный VPN с шифрованием военного уровня. Обходите блокировки, защищайте данные и оставайтесь анонимным.</p>
+<div class="hero-buttons">
+<button class="btn-primary" onclick="document.getElementById('trial').scrollIntoView({behavior:'smooth'})"><i class="fas fa-gift"></i> Попробовать бесплатно</button>
+<button class="btn-outline" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})"><i class="fas fa-tag"></i> Узнать цены</button>
+</div>
+</div>
+<div class="hero-visual">
+<div class="hero-card">
+<div class="shield-icon"><i class="fas fa-shield-halved"></i></div>
+<div class="status"><div class="status-dot"></div><span style="font-weight:600">Защита активна</span></div>
+<h3>Ваше соединение</h3>
+<p class="sub">Зашифровано и анонимно</p>
+</div>
+</div>
+</section>
+<section class="trial-section" id="trial">
+<div class="trial-banner">
+<h2><i class="fas fa-gift"></i> Бесплатный доступ</h2>
+<p style="color:#a0a8c0;font-size:18px">Попробуйте все возможности сервиса без оплаты</p>
+<div class="trial-details">
+<div class="trial-detail"><i class="fas fa-calendar-alt"></i><span><strong>3 дня</strong> бесплатно</span></div>
+<div class="trial-detail"><i class="fas fa-database"></i><span><strong>50 ГБ</strong> трафика</span></div>
+<div class="trial-detail"><i class="fas fa-network-wired"></i><span><strong>3 IP</strong> лимит</span></div>
+</div>
+<button class="btn-trial" onclick="openTrialModal()"><i class="fas fa-key"></i> Получить пробный ключ</button>
+<p style="color:#68708a;font-size:14px;margin-top:16px"><i class="fas fa-info-circle"></i> Без привязки карты. Активация моментальная.</p>
+</div>
+</section>
+<section class="pricing-section" id="pricing">
+<h2 class="section-title">Выберите тариф</h2>
+<p class="section-subtitle">Прозрачные цены. Никаких скрытых платежей.</p>
+<div class="pricing-grid">
+<div class="pricing-card" onclick="selectPlan(this)">
+<h3>1 месяц</h3>
+<div class="price">150 ₽</div>
+<div class="price-period">в месяц</div>
+<ul class="features-list">
+<li><i class="fas fa-check"></i> 100 ГБ трафика</li>
+<li><i class="fas fa-check"></i> 3 устройства</li>
+<li><i class="fas fa-check"></i> Высокая скорость</li>
+<li><i class="fas fa-check"></i> Круглосуточная поддержка</li>
+</ul>
+<button class="btn-pricing secondary" onclick="buyPlan(event,this)">Купить</button>
+</div><div class="pricing-card" onclick="selectPlan(this)">
+<h3>3 месяца</h3>
+<div class="price">450 ₽</div>
+<div class="price-period">за 3 месяца</div>
+<ul class="features-list">
+<li><i class="fas fa-check"></i> 300 ГБ трафика</li>
+<li><i class="fas fa-check"></i> 5 устройств</li>
+<li><i class="fas fa-check"></i> Высокая скорость</li>
+<li><i class="fas fa-check"></i> Круглосуточная поддержка</li>
+</ul>
+<button class="btn-pricing secondary" onclick="buyPlan(event,this)">Купить</button>
+</div>
+<div class="pricing-card popular" onclick="selectPlan(this)">
+<h3>6 месяцев</h3>
+<div class="price">900 ₽</div>
+<div class="price-period">за 6 месяцев</div>
+<ul class="features-list">
+<li><i class="fas fa-check"></i> 400 ГБ трафика</li>
+<li><i class="fas fa-check"></i> 7 устройств</li>
+<li><i class="fas fa-check"></i> Высокая скорость</li>
+<li><i class="fas fa-check"></i> Круглосуточная поддержка</li>
+</ul>
+<button class="btn-pricing primary" onclick="buyPlan(event,this)">Купить</button>
+</div>
+<div class="pricing-card" onclick="selectPlan(this)">
+<h3>12 месяцев</h3>
+<div class="price">2000 ₽</div>
+<div class="price-period">за год</div>
+<ul class="features-list">
+<li><i class="fas fa-check"></i> Безлимитный трафик</li>
+<li><i class="fas fa-check"></i> 7 устройств</li>
+<li><i class="fas fa-check"></i> Максимальная скорость</li>
+<li><i class="fas fa-check"></i> Круглосуточная поддержка</li>
+</ul>
+<button class="btn-pricing secondary" onclick="buyPlan(event,this)">Купить</button>
+</div>
+</div>
+</section>
+<section class="support-section" id="support">
+<div class="support-card">
+<h2><i class="fas fa-headset" style="color:#00d4ff;margin-right:12px"></i>Поддержка 24/7</h2>
+<p>Возникли вопросы? Наша команда всегда на связи и готова помочь.</p>
+<div class="support-buttons">
+<a href="https://t.me/tesvpnss" target="_blank" class="support-btn telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+<a href="mailto:supportesvpn@gmail.com" class="support-btn email"><i class="fas fa-envelope"></i> supportesvpn@gmail.com</a>
+</div>
+</div>
+</section>
+<footer>
+<div>© 2026 TESVPN. Все права защищены.</div>
+<div class="footer-links">
+<a href="#">Политика конфиденциальности</a>
+<a href="#">Условия использования</a>
+<a href="#">Оферта</a>
+</div>
+</footer>
+</div>
+<div class="modal-overlay" id="trialModal">
+<div class="modal">
+<button class="modal-close" onclick="closeTrialModal()"><i class="fas fa-times"></i></button>
+<div class="modal-icon"><i class="fas fa-key"></i></div>
+<h3>Ваш пробный ключ</h3>
+<p class="modal-subtitle">Скопируйте ключ и активируйте его в приложении</p>
+<div class="key-box">
+<code id="trialKey">TES-0000-0000-0000</code>
+<button class="copy-btn" onclick="copyKey(this)"><i class="fas fa-copy"></i></button>
+</div>
+<div class="modal-features">
+<div class="modal-feature"><i class="fas fa-calendar-alt"></i><span>Действует <strong>3 дня</strong></span></div>
+<div class="modal-feature"><i class="fas fa-database"></i><span>Лимит трафика <strong>50 ГБ</strong></span></div>
+<div class="modal-feature"><i class="fas fa-network-wired"></i><span>До <strong>3 IP</strong> адресов</span></div>
+</div>
+<div class="modal-actions">
+<a href="https://t.me/tesvpnss" target="_blank" class="modal-btn primary"><i class="fab fa-telegram-plane"></i> Активировать в Telegram</a>
+<button class="modal-btn secondary" onclick="closeTrialModal()">Закрыть</button>
+</div>
+</div>
+</div>
+<script>
+function generateKey(){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let k='TES';for(let i=0;i<3;i++){k+='-';for(let j=0;j<4;j++)k+=c[Math.floor(Math.random()*c.length)]}return k}
+function openTrialModal(){document.getElementById('trialKey').textContent=generateKey();document.getElementById('trialModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeTrialModal(){document.getElementById('trialModal').classList.remove('active');document.body.style.overflow=''}
+function copyKey(b){const k=document.getElementById('trialKey').textContent;navigator.clipboard.writeText(k).then(()=>{b.classList.add('copied');b.innerHTML='<i class="fas fa-check"></i>';setTimeout(()=>{b.classList.remove('copied');b.innerHTML='<i class="fas fa-copy"></i>'},1500)})}
+function selectPlan(c){document.querySelectorAll('.pricing-card').forEach(x=>{x.classList.remove('popular');x.querySelector('.btn-pricing').classList.remove('primary');x.querySelector('.btn-pricing').classList.add('secondary')});c.classList.add('popular');const b=c.querySelector('.btn-pricing');b.classList.remove('secondary');b.classList.add('primary')}
+function buyPlan(e,b){e.stopPropagation();const c=b.closest('.pricing-card');alert('Переход к оплате\n\nТариф: '+c.querySelector('h3').textContent+'\nСумма: '+c.querySelector('.price').textContent)}
+document.getElementById('trialModal').addEventListener('click',function(e){if(e.target===this)closeTrialModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeTrialModal()});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})})})
+</script>
+</body>
+</html>
